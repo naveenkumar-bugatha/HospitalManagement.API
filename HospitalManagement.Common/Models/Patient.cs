@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace HospitalManagement.Common.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Patient
     {
         public string Name { get; set; }
