@@ -10,12 +10,12 @@ namespace HospitalManagement.API.Tests
     public class PatientControllerTests
     {
         private readonly Mock<IPatientService> mockPatientService;
-        private readonly Mock<ILogger<PatientController>> mockLogger;
-        private readonly PatientController patientController;
+        private readonly Mock<ILogger<PatientsController>> mockLogger;
+        private readonly PatientsController patientController;
         public PatientControllerTests() {
             this.mockPatientService = new Mock<IPatientService>();
-            this.mockLogger = new Mock<ILogger<PatientController>>();
-            this.patientController = new PatientController(this.mockLogger.Object, this.mockPatientService.Object);
+            this.mockLogger = new Mock<ILogger<PatientsController>>();
+            this.patientController = new PatientsController(this.mockLogger.Object, this.mockPatientService.Object);
 
         }
 

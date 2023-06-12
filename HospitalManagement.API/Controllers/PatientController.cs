@@ -6,12 +6,12 @@ namespace HospitalManagement.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PatientController : ControllerBase
+    public class PatientsController : ControllerBase
     {
-        private readonly ILogger<PatientController> _logger;
+        private readonly ILogger<PatientsController> _logger;
         private readonly IPatientService _patientService;
 
-        public PatientController(ILogger<PatientController> logger, IPatientService patientService)
+        public PatientsController(ILogger<PatientsController> logger, IPatientService patientService)
         {
             _logger = logger;
             _patientService = patientService;
