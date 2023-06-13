@@ -1,6 +1,7 @@
 using HospitalManagement.Common.Models;
 using HospitalManagement.Service.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Web.Http;
 
 namespace HospitalManagement.Controllers
 {
@@ -11,16 +12,58 @@ namespace HospitalManagement.Controllers
         private readonly ILogger<PatientsController> _logger;
         private readonly IPatientService _patientService;
 
+        /// <summary>
+        /// PatientsController.
+        /// </summary>
+        /// <param name="logger">logger.</param>
+        /// <param name="patientService">patientService.</param>
         public PatientsController(ILogger<PatientsController> logger, IPatientService patientService)
         {
             _logger = logger;
             _patientService = patientService;
         }
 
+        /// <summary>
+        /// GetPatients.
+        /// </summary>
+        /// <returns>Task</returns>
         [HttpGet]
-        public async Task<IList<Patient>> GetPatients()
+        public async Task<IActionResult> GetPatients()
         {
-            return await _patientService.GetPatientsAsync();
+            var result = await _patientService.GetPatientsAsync();
+            if(result == null){
+                return new NotFoundObjectResult(result);
+            }
+            else {
+                return new OkObjectResult(result);
+            }
+        }
+
+        /// <summary>
+        /// Get patient by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPatient(int id)
+        {
+            if(id != 0)
+            {
+                var result = await _patientService.GetPatientAsync(id);
+                if (result == null)
+                {
+                    return new NotFoundObjectResult(result);
+                }
+                else
+                {
+                    return new OkObjectResult(result);
+                }
+            }
+            else
+            {
+                return new BadRequestObjectResult(id);
+            }
+            
         }
     }
 }
