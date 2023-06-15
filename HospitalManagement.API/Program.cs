@@ -1,3 +1,5 @@
+using HospitalManagement.DataAccess;
+using HospitalManagement.DataAccess.Repository;
 using HospitalManagement.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IPatientService, PatientService>();
+builder.Services.AddTransient<IPatientRepository, PatientRepository>();
+builder.Services.AddDbContext<PatientDBContext>();
 
 var app = builder.Build();
 

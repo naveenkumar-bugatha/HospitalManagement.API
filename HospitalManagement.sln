@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.API", "HospitalManagement.API\HospitalManagement.API.csproj", "{38A7F9DA-D1D1-4119-9B75-F6A90C27D982}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagement.API", "HospitalManagement.API\HospitalManagement.API.csproj", "{38A7F9DA-D1D1-4119-9B75-F6A90C27D982}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.API.Tests", "HospitalManagement.API.Tests\HospitalManagement.API.Tests.csproj", "{13046767-292A-49D4-8068-3FC6F6BF0076}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagement.API.Tests", "HospitalManagement.API.Tests\HospitalManagement.API.Tests.csproj", "{13046767-292A-49D4-8068-3FC6F6BF0076}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.Service", "HospitalManagement.Service\HospitalManagement.Service.csproj", "{080ACAE7-B660-4193-8F26-2456FB62FDBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagement.Service", "HospitalManagement.Service\HospitalManagement.Service.csproj", "{080ACAE7-B660-4193-8F26-2456FB62FDBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.Common", "HospitalManagement.Common\HospitalManagement.Common.csproj", "{8BD52A33-BED8-4AFE-9544-3EF5EEAEE4E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagement.Common", "HospitalManagement.Common\HospitalManagement.Common.csproj", "{8BD52A33-BED8-4AFE-9544-3EF5EEAEE4E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.Service.Tests", "HospitalManagement.Service.Tests\HospitalManagement.Service.Tests.csproj", "{265D830C-C87F-4EA3-932E-46AAD2DEA2B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalManagement.Service.Tests", "HospitalManagement.Service.Tests\HospitalManagement.Service.Tests.csproj", "{265D830C-C87F-4EA3-932E-46AAD2DEA2B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.Integration.Tests", "HospitalManagement.Integration.Tests\HospitalManagement.Integration.Tests.csproj", "{1D005AEC-B0BB-493A-8527-E5EDDB3F63E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.DataAccess", "HospitalManagement.DataAccess\HospitalManagement.DataAccess.csproj", "{EFB84558-DE10-433B-ABD9-86A00B9A755E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalManagement.DataAccess.Tests", "HospitalManagement.DataAccess.Tests\HospitalManagement.DataAccess.Tests.csproj", "{5B3AF5CC-9777-49A1-82ED-6E8A21336412}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{265D830C-C87F-4EA3-932E-46AAD2DEA2B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{265D830C-C87F-4EA3-932E-46AAD2DEA2B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{265D830C-C87F-4EA3-932E-46AAD2DEA2B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D005AEC-B0BB-493A-8527-E5EDDB3F63E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D005AEC-B0BB-493A-8527-E5EDDB3F63E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D005AEC-B0BB-493A-8527-E5EDDB3F63E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D005AEC-B0BB-493A-8527-E5EDDB3F63E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFB84558-DE10-433B-ABD9-86A00B9A755E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFB84558-DE10-433B-ABD9-86A00B9A755E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFB84558-DE10-433B-ABD9-86A00B9A755E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFB84558-DE10-433B-ABD9-86A00B9A755E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3AF5CC-9777-49A1-82ED-6E8A21336412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3AF5CC-9777-49A1-82ED-6E8A21336412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3AF5CC-9777-49A1-82ED-6E8A21336412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3AF5CC-9777-49A1-82ED-6E8A21336412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

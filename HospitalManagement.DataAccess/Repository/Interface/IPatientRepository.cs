@@ -1,9 +1,13 @@
 ﻿using HospitalManagement.Common.Models;
-using System.Collections;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HospitalManagement.Service.Services
+namespace HospitalManagement.DataAccess.Repository
 {
-    public interface IPatientService
+    public interface IPatientRepository
     {
         /// <summary>
         /// GetPatientsAsync

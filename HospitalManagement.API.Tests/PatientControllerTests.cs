@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System.Net;
+using AutoFixture;
+using FluentAssertions;
 using Xunit;
 
 namespace HospitalManagement.API.Tests
@@ -30,23 +31,21 @@ namespace HospitalManagement.API.Tests
 
             //Act
             var result = await this.patientController.GetPatients().ConfigureAwait(false);
-            var objectResult = (NotFoundObjectResult)result;
+            var objectResult = (NotFoundResult)result;
 
             //Assert
             Assert.NotNull(result);
-            var assertResult = Assert.IsAssignableFrom<NotFoundObjectResult>(result);
+            var assertResult = Assert.IsAssignableFrom<NotFoundResult>(result);
             Assert.Equal(StatusCodes.Status404NotFound, objectResult.StatusCode);
+            mockPatientService.Verify(x => x.GetPatientsAsync(), Times.Once());
         }
 
         [Fact]
         public async Task GetPatientsAsync_Should_Succeed_200()
         {
             //Arrange
-            var patients = new List<Patient>()
-            {
-                new Patient { Name = "Naveen", Age = 32 },
-                new Patient { Name = "Kumar", Age = 24 }
-            };
+            var fixture = new Fixture();
+            var patients = fixture.Create<List<Patient>>();
             this.mockPatientService.Setup(x => x.GetPatientsAsync()).ReturnsAsync(patients);
 
             //Act
@@ -57,6 +56,7 @@ namespace HospitalManagement.API.Tests
             Assert.NotNull(result);
             var assertResult = Assert.IsAssignableFrom<OkObjectResult>(result);
             Assert.Equal(StatusCodes.Status200OK, objectResult.StatusCode);
+            mockPatientService.Verify(x => x.GetPatientsAsync(), Times.Once());
         }
 
         [Fact]
@@ -67,19 +67,21 @@ namespace HospitalManagement.API.Tests
 
             //Act
             var result = await this.patientController.GetPatient(1).ConfigureAwait(false);
-            var objectResult = (NotFoundObjectResult)result;
+            var objectResult = (NotFoundResult)result;
 
             //Assert
             Assert.NotNull(result);
-            var assertResult = Assert.IsAssignableFrom<NotFoundObjectResult>(result);
+            var assertResult = Assert.IsAssignableFrom<NotFoundResult>(result);
             Assert.Equal(StatusCodes.Status404NotFound, objectResult.StatusCode);
+            mockPatientService.Verify(x => x.GetPatientsAsync(), Times.Never());
         }
 
         [Fact]
         public async Task GetPatientAsyncById_Should_Succeed_200()
         {
             //Arrange
-            var patient = new Patient { Name = "Naveen", Age = 32 };
+            var fixture = new Fixture();
+            var patient = fixture.Create<Patient>();
 
             this.mockPatientService.Setup(x => x.GetPatientAsync(It.IsAny<int>())).ReturnsAsync(patient);
 
@@ -91,6 +93,7 @@ namespace HospitalManagement.API.Tests
             Assert.NotNull(result);
             var assertResult = Assert.IsAssignableFrom<OkObjectResult>(result);
             Assert.Equal(StatusCodes.Status200OK, objectResult.StatusCode);
+            mockPatientService.Verify(x => x.GetPatientAsync(It.IsAny<int>()), Times.Once());
         }
 
         [Fact]
@@ -98,12 +101,13 @@ namespace HospitalManagement.API.Tests
         {
             //Act
             var result = await this.patientController.GetPatient(0);
-            var objectResult = (BadRequestObjectResult)result;
+            var objectResult = (BadRequestResult)result;
 
             //Assert
             Assert.NotNull(result);
-            var assertResult = Assert.IsAssignableFrom<BadRequestObjectResult>(result);
+            var assertResult = Assert.IsAssignableFrom<BadRequestResult>(result);
             Assert.Equal(StatusCodes.Status400BadRequest, objectResult.StatusCode);
+            mockPatientService.Verify(x => x.GetPatientsAsync(), Times.Never());
         }
     }
 }

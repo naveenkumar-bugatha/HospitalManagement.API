@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HospitalManagement.DataAccess\HospitalManagement.DataAccess.csproj" />
     <ProjectReference Include="..\HospitalManagement.Service\HospitalManagement.Service.csproj" />
   </ItemGroup>
 
