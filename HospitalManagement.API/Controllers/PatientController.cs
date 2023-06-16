@@ -113,7 +113,7 @@ namespace HospitalManagement.Controllers
         /// </summary>
         /// <param name="id">id.</param>
         /// <returns></returns>
-        [HttpPut("DeletePatient")]
+        [HttpDelete("DeletePatient/{id}")]
         public async Task<IActionResult> DeletePatientAsync(int id)
         {
             if (id == 0)
