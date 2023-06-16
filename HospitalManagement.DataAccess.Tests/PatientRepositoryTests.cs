@@ -40,7 +40,7 @@ namespace HospitalManagement.DataAccess.Tests
             // Arrange
 
             var builder = new DbContextOptionsBuilder<PatientDBContext>();
-            builder.UseInMemoryDatabase("GetPatientAsync");
+            builder.UseInMemoryDatabase("GetPatientByIdAsync");
             builder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             using var context = new PatientDBContext(builder.Options);
             var patientrepository = new PatientRepository(context);
@@ -65,7 +65,7 @@ namespace HospitalManagement.DataAccess.Tests
             // Arrange
 
             var builder = new DbContextOptionsBuilder<PatientDBContext>();
-            builder.UseInMemoryDatabase("GetPatientAsync");
+            builder.UseInMemoryDatabase("AddPatientAsync");
             builder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             using var context = new PatientDBContext(builder.Options);
             var patientrepository = new PatientRepository(context);
@@ -79,6 +79,53 @@ namespace HospitalManagement.DataAccess.Tests
             var patientOp = await patientrepository.GetPatientAsync(patient.Id);
             Assert.NotNull(patientOp);
             Assert.Equal(patient.Name, patientOp.Name);
+        }
+
+        [Fact]
+        public async void PatientRepository_UpdatePatientAsync_Should_UpdatePatient_Success()
+        {
+            // Arrange
+
+            var builder = new DbContextOptionsBuilder<PatientDBContext>();
+            builder.UseInMemoryDatabase("UpdatePatientAsync");
+            builder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            using var context = new PatientDBContext(builder.Options);
+            var patientrepository = new PatientRepository(context);
+
+            var fixture = new Fixture();
+            var patient = fixture.Create<Patient>();
+            await context.Patients.AddAsync(patient);
+            await context.SaveChangesAsync();
+
+            // Action
+            var patientOp = await patientrepository.UpdatePatientAsync(patient);
+
+            // Assert
+
+            Assert.True(patientOp);
+        }
+
+        [Fact]
+        public async void PatientRepository_DeletePatientAsync_Should_DeletePatient_Success()
+        {
+            // Arrange
+
+            var builder = new DbContextOptionsBuilder<PatientDBContext>();
+            builder.UseInMemoryDatabase("DeletePatientAsync");
+            builder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            using var context = new PatientDBContext(builder.Options);
+            var patientrepository = new PatientRepository(context);
+
+            var fixture = new Fixture();
+            var patient = fixture.Create<Patient>();
+            await context.Patients.AddAsync(patient);
+            await context.SaveChangesAsync();
+
+            // Action
+            var result =await patientrepository.DeletePatientAsync(patient.Id);
+
+            // Assert
+            Assert.True(result);
         }
 
     }

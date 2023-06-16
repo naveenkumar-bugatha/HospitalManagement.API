@@ -66,5 +66,39 @@ namespace HospitalManagement.Service.Tests
             Assert.True(result);
             Assert.IsAssignableFrom<bool>(result);
         }
+
+        [Fact]
+        public async void PatienService_DeletePatientAsync_Should_Succeed()
+        {
+            //Arrange
+            var fixture = new Fixture();
+            var patient = fixture.Create<Patient>();
+            PatientService patientService = new PatientService(this.mockPatientRepository.Object);
+            this.mockPatientRepository.Setup(x => x.DeletePatientAsync(It.IsAny<int>())).ReturnsAsync(true);
+
+            //Act
+            var result = await patientService.DeletePatientAsync(It.IsAny<int>());
+
+            //Assert
+            Assert.True(result);
+            Assert.IsAssignableFrom<bool>(result);
+        }
+
+        [Fact]
+        public async void PatienService_UpdatePatientAsync_Should_Succeed()
+        {
+            //Arrange
+            var fixture = new Fixture();
+            var patient = fixture.Create<Patient>();
+            PatientService patientService = new PatientService(this.mockPatientRepository.Object);
+            this.mockPatientRepository.Setup(x => x.UpdatePatientAsync(It.IsAny<Patient>())).ReturnsAsync(true);
+
+            //Act
+            var result = await patientService.UpdatePatientAsync(It.IsAny<Patient>());
+
+            //Assert
+            Assert.True(result);
+            Assert.IsAssignableFrom<bool>(result);
+        }
     }
 }

@@ -24,5 +24,19 @@ namespace HospitalManagement.Service.Services
         /// <param name="patient">patient</param>
         /// <returns>Task</returns>
         Task<bool> AddPatientAsync(Patient patient);
+
+        /// <summary>
+        /// DeletePatientAsync
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Task</returns>
+        Task<bool> DeletePatientAsync(int id);
+
+        // <summary>
+        /// UpdatePatientAsync
+        /// </summary>
+        /// <param name="patient">patient</param>
+        /// <returns>Task</returns>
+        Task<bool> UpdatePatientAsync(Patient patient);
     }
 }

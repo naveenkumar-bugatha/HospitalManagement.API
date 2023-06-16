@@ -19,6 +19,8 @@ namespace HospitalManagement.Integration.Tests
             public readonly static string GetPatients = "/api/Patient/GetPatients";
             public readonly static string GetPatient = "/api/Patient/GetPatient/";
             public readonly static string AddPatient = "/api/Patient/AddPatient";
+            public readonly static string DeletePatient = "/api/Patient/DeletePatient";
+            public readonly static string UpdatePatient = "/api/Patient/UpdatePatient";
         }
     }
 }

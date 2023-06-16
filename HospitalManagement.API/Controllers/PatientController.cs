@@ -74,12 +74,54 @@ namespace HospitalManagement.Controllers
         [HttpPost("AddPatient")]
         public async Task<IActionResult> AddPatientAsync(Patient patient)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || patient == null)
             {
                 return new BadRequestResult();
             }
 
             if (await _patientService.AddPatientAsync(patient))
+            {
+                return Ok();
+            }
+
+            return new InternalServerErrorResult();
+        }
+
+        /// <summary>
+        /// UpdatePatientAsync.
+        /// </summary>
+        /// <param name="patient">Patient.</param>
+        /// <returns></returns>
+        [HttpPut("UpdatePatient")]
+        public async Task<IActionResult> UpdatePatientAsync(Patient patient)
+        {
+            if (!ModelState.IsValid || patient == null)
+            {
+                return new BadRequestResult();
+            }
+
+            if (await _patientService.UpdatePatientAsync(patient))
+            {
+                return Ok();
+            }
+
+            return new InternalServerErrorResult();
+        }
+
+        /// <summary>
+        /// DeletePatientAsync.
+        /// </summary>
+        /// <param name="id">id.</param>
+        /// <returns></returns>
+        [HttpPut("DeletePatient")]
+        public async Task<IActionResult> DeletePatientAsync(int id)
+        {
+            if (id == 0)
+            {
+                return new BadRequestResult();
+            }
+
+            if (await _patientService.DeletePatientAsync(id))
             {
                 return Ok();
             }

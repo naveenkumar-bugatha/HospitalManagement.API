@@ -37,5 +37,25 @@ namespace HospitalManagement.Service.Services
         {
             return await _patientRepository.AddPatientAsync(patient);
         }
+
+        /// <summary>
+        /// DeletePatientAsync
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Task</returns>
+        public async Task<bool> DeletePatientAsync(int id)
+        {
+            return await _patientRepository.DeletePatientAsync(id);
+        }
+
+        // <summary>
+        /// UpdatePatientAsync
+        /// </summary>
+        /// <param name="patient">patient</param>
+        /// <returns>Task</returns>
+        public async Task<bool> UpdatePatientAsync(Patient patient)
+        {
+            return await _patientRepository.UpdatePatientAsync(patient);
+        }
     }
 }

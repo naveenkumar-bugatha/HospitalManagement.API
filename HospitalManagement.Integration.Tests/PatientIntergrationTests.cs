@@ -74,5 +74,32 @@ namespace HospitalManagement.Integration.Tests
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
             response.Should().NotBeNull();
         }
+
+        [Fact]
+        public async Task UpdatePatientAsync_ShouldReturn_UpdatePatient_Success()
+        {
+            // Arrange
+            var fixture = new Fixture();
+            var patient = fixture.Create<Patient>();
+            HttpContent httpContent = new StringContent(JsonConvert.ToString(patient));
+
+            // Act
+            var response = await _client.PutAsync(HttpHelper.Urls.UpdatePatient, httpContent);
+
+            // Assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+            response.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task DeletePatientAsync_ShouldReturn_DeletePatient_Success()
+        {
+            // Act
+            var response = await _client.DeleteAsync(HttpHelper.Urls.DeletePatient + "1");
+
+            // Assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+            response.Should().NotBeNull();
+        }
     }
 }
