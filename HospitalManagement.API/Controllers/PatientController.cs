@@ -6,7 +6,7 @@ using System.Web.Http;
 namespace HospitalManagement.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PatientsController : ControllerBase
     {
         private readonly ILogger<PatientsController> _logger;

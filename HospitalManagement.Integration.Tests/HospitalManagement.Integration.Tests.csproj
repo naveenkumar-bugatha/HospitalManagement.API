@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HospitalManagement.API\HospitalManagement.API.csproj" />
     <ProjectReference Include="..\HospitalManagement.Common\HospitalManagement.Common.csproj" />
   </ItemGroup>
 
