@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using AutoFixture;
-using FluentAssertions;
 using Xunit;
 using System.Web.Http;
 

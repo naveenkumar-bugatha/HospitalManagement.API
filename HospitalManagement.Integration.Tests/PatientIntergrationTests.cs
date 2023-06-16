@@ -4,7 +4,6 @@ using System.Net.Http.Json;
 using FluentAssertions;
 using AutoFixture;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Text;
 
 namespace HospitalManagement.Integration.Tests

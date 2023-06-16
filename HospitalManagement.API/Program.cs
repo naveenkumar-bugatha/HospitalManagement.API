@@ -15,8 +15,6 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<PatientDBContext>();
-
         builder.Services.AddTransient<IPatientService, PatientService>();
         builder.Services.AddTransient<IPatientRepository, PatientRepository>();
         builder.Services.AddDbContext<PatientDBContext>();
