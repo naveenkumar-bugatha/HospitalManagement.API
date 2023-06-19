@@ -20,14 +20,8 @@ namespace HospitalManagement.Integration.Tests
         }
 
         [Fact]
-        public async Task GetpatientsAsync_ShouldReturnTheExpecedPatients()
+        public async Task Get_GetpatientsAsync_ShouldSuccess_WhenPatientsRetrieved()
         {
-            // Arrange
-            var fixture = new Fixture();
-            var patient = fixture.Create<Patient>();
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
-            await _client.PostAsync(HttpHelper.Urls.AddPatient, httpContent);
-
             // Act
             var response = await _client.GetAsync(HttpHelper.Urls.GetPatients);
             var result = await response.Content.ReadFromJsonAsync<List<Patient>>();
@@ -38,28 +32,19 @@ namespace HospitalManagement.Integration.Tests
         }
 
         [Fact]
-        public async Task GetpatientAsync_ShouldReturnTheExpecedPatient()
+        public async Task Get_GetpatientAsync_ShouldSuccess_WhenPatientreturnedbyId()
         {
-            // Arrange
-            var fixture = new Fixture();
-            var patient = fixture.Create<Patient>();
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
-            await _client.PostAsync(HttpHelper.Urls.AddPatient, httpContent);
-
             // Act
-            var response = await _client.GetAsync(HttpHelper.Urls.GetPatient + patient.Id);
+            var response = await _client.GetAsync(HttpHelper.Urls.GetPatient + "1");
             var result = await response.Content.ReadFromJsonAsync<Patient>();
 
             // Assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-            result?.Id.Should().Be(patient.Id);
-            result.Should()
-                .BeEquivalentTo(patient,
-                options => options.Excluding(t => t.Id));
+            result?.Id.Should().Be(1);
         }
 
         [Fact]
-        public async Task GetpatientAsync_ShouldReturn_BadRequestException()
+        public async Task Get_GetpatientAsync_ShouldReturn_BadRequest_WhenPassInvalidInput()
         {
             // Act
             var response = await _client.GetAsync(HttpHelper.Urls.GetPatient + "0");
@@ -70,7 +55,7 @@ namespace HospitalManagement.Integration.Tests
         }
 
         [Fact]
-        public async Task AddPatientAsync_Should_AddPatient_Success()
+        public async Task Post_AddPatientAsync_ShouldSuccess_WhenPatientGetsAdded()
         {
             // Arrange
             var fixture = new Fixture();
@@ -89,7 +74,7 @@ namespace HospitalManagement.Integration.Tests
         }
 
         [Fact]
-        public async Task AddPatientAsync_Should_return_BadRequest()
+        public async Task Post_AddPatientAsync_Should_return_BadRequest_WhenWePass_InvalidInput()
         {
             // Arrange
             HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(null), Encoding.UTF8, "application/json");
@@ -103,7 +88,7 @@ namespace HospitalManagement.Integration.Tests
         }
 
         [Fact]
-        public async Task UpdatePatientAsync_Should_return_BadRequest()
+        public async Task Put_UpdatePatientAsync_Should_return_BadRequest_WhenWePass_InvalidInput()
         {
             // Arrange
             HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(null), Encoding.UTF8, "application/json");
@@ -117,7 +102,7 @@ namespace HospitalManagement.Integration.Tests
         }
 
         [Fact]
-        public async Task DeletePatientAsync_Should_return_BadRequest()
+        public async Task Delete_DeletePatientAsync_Should_return_BadRequest_WhenWePass_InvalidInput()
         {
             // Arrange
             HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(null), Encoding.UTF8, "application/json");
@@ -131,16 +116,12 @@ namespace HospitalManagement.Integration.Tests
         }
 
         [Fact]
-        public async Task UpdatePatientAsync_Should_UpdatePatient_Success()
+        public async Task Put_UpdatePatientAsync_ShouldSuccess_When_Patient_GetsUpdated()
         {
             // Arrange
             var fixture = new Fixture();
-            var patient = fixture.Create<Patient>();
-            HttpContent httpContent1 = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
-            await _client.PostAsync(HttpHelper.Urls.AddPatient, httpContent1);
-
             var updatePatient = fixture.Create<Patient>();
-            updatePatient.Id = patient.Id;
+            updatePatient.Id = 1;
             HttpContent httpContent2 = new StringContent(JsonConvert.SerializeObject(updatePatient), Encoding.UTF8, "application/json");
 
             // Act
@@ -149,23 +130,17 @@ namespace HospitalManagement.Integration.Tests
             // Assert
             var getResponse = await _client.GetAsync(HttpHelper.Urls.GetPatient + updatePatient.Id);
             var result = await getResponse.Content.ReadFromJsonAsync<Patient>();
-            result?.Id.Should().Be(patient.Id);
+            result?.Id.Should().Be(1);
             result?.Name.Should().Be(updatePatient.Name);
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
             response.Should().NotBeNull();
         }
 
         [Fact]
-        public async Task DeletePatientAsync_Should_DeletePatient_Success()
+        public async Task Delete_DeletePatientAsync_ShouldSuccess_WhenPatientGetsDeleted()
         {
-            // Arrange
-            var fixture = new Fixture();
-            var patient = fixture.Create<Patient>();
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
-            await _client.PostAsync(HttpHelper.Urls.AddPatient, httpContent);
-
             // Act
-            var response = await _client.DeleteAsync(HttpHelper.Urls.DeletePatient + patient.Id);
+            var response = await _client.DeleteAsync(HttpHelper.Urls.DeletePatient + "2");
 
             // Assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);

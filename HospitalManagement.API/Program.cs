@@ -17,9 +17,19 @@ public class Program
 
         builder.Services.AddTransient<IPatientService, PatientService>();
         builder.Services.AddTransient<IPatientRepository, PatientRepository>();
+        builder.Services.AddTransient<DataSeeder>();
         builder.Services.AddDbContext<PatientDBContext>();
-
         var app = builder.Build();
+        SeedData(app);
+
+        void SeedData(IHost app){
+            var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+            using (var scope = scopedFactory?.CreateScope())
+            {
+                var service = scope?.ServiceProvider.GetService<DataSeeder>();
+                    service?.SeedData();
+            }
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
